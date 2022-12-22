@@ -1,15 +1,9 @@
-import { Notification } from '../../../src/application/entities/notification';
 import { SendNotification } from '../../../src/application/use-cases/send-notification';
-
-const notifications: Notification[] = [];
-const notificationRepository = {
-  async create(notification: Notification) {
-    notifications.push(notification);
-  },
-};
+import { InMemoryNotificationRepository } from '../repositories/in-memory-notification-repository';
 
 describe('Send Notification', () => {
   it('should br able to send a  notification', async () => {
+    const notificationRepository = new InMemoryNotificationRepository();
     const sendNotification = new SendNotification(notificationRepository);
 
     await sendNotification.execute({
@@ -18,6 +12,6 @@ describe('Send Notification', () => {
       recipientId: 'exemple-recipient-id',
     });
 
-    expect(notifications).toHaveLength(1);
+    expect(notificationRepository.notifications).toHaveLength(1);
   });
 });
