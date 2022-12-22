@@ -6,11 +6,10 @@ describe('Notification', () => {
     const notificationProps = {
       content: new Content('You receive a request friend'),
       category: 'social',
-      recipientId: 'any-recepient-id',
-      createAt: new Date(),
+      recipientId: 'any-recipient-id',
     };
     const notification = new Notification(notificationProps);
 
-    // expect(c )
+    expect(notification).toBeTruthy();
   });
 });
